@@ -120,7 +120,7 @@ public class FileRepository implements IRepository {
 
     @Override
     public ArrayList<Train> search(String destination, OffsetTime departureTime) {
-        return (ArrayList<Train>) cache.stream().filter(e -> e.getDestination().contains(destination) && e.getDepartureTime().compareTo(departureTime)<=0).collect(Collectors.toList());
+        return (ArrayList<Train>) cache.stream().filter(e -> e.getDestination().contains(destination) && e.getDepartureTime().compareTo(departureTime)>=0).collect(Collectors.toList());
     }
 
     @Override

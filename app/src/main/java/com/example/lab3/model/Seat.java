@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class Seat implements Serializable {
-
     private SeatType seatType;
     private int count;
 

@@ -27,6 +27,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -34,6 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsFragment extends Fragment {
     private LocationManager locationManager;
     private GoogleMap map;
+    private Circle circle;
 
     private final LocationListener locationListener = new LocationListener() {
         @Override
@@ -41,7 +43,9 @@ public class MapsFragment extends Fragment {
             //your code here
             Log.d("onLocationChanged", String.valueOf(location));
             LatLng center = new LatLng(location.getLatitude(), location.getLongitude());
-            map.addCircle(new CircleOptions().center(center).radius(location.getAccuracy() + 100).fillColor(Color.GREEN));
+            if(circle != null)
+                circle.remove();
+            circle = map.addCircle(new CircleOptions().center(center).radius(location.getAccuracy() + 100).fillColor(Color.GREEN));
 
         }
 
@@ -52,16 +56,6 @@ public class MapsFragment extends Fragment {
     };
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LatLng sydney = new LatLng(52.4313, 30.9934);
