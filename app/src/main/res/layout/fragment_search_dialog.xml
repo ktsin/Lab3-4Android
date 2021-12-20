@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginVertical="10dp"
+    android:layout_marginHorizontal="20dp"
+    >
+    <EditText
+        android:id="@+id/destination_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/x0012"
+        android:hint="@string/destination"
+        android:inputType="text"
+        android:importantForAutofill="no" />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/x0012"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/destination_search">
+        <EditText
+            android:id="@+id/time_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toLeftOf="@id/switch_search"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/destination_search"
+            android:hint="@string/departure_time"
+            android:layout_weight="80"
+            android:inputType="time"
+            android:importantForAutofill="no" />
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@id/time_search"
+            app:layout_constraintLeft_toRightOf="parent"
+            android:layout_weight="5"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

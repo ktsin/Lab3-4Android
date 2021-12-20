@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save_menu_title">Save</string>
+    <string name="add_new_record">Add new record...</string>
+    <string name="save_record_button_label">Save record</string>
+    <string name="cancel_button_label">Cancel</string>
+    <string name="lorem_ipsum">Lorem ipsum</string>
+    <string name="train_number_label">Train number</string>
+    <string name="destination">Destination</string>
+    <string name="departure_time">Departure time</string>
+    <string name="shared_seats">Shared seats</string>
+    <string name="compartment_seats">Compartment seats</string>
+    <string name="reserved_seats">Reserved seats</string>
+    <string name="luxury_seats">Luxury seats</string>
+    <string name="remove_item">Remove item</string>
+    <string name="change_color">Change color</string>
+    <string name="refresh">Refresh</string>
+    <string name="edit_record">Edit record</string>
+    <string name="search_record">Search record</string>
+</resources>

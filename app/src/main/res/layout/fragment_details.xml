@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".activities.AddEditActivity"
+        >
+        <!--    train number pair   -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/x0002"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/x0003">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:text="@string/train_number_label"
+                />
+            <TextView
+                android:id="@+id/train_number_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_weight="1"
+                android:inputType="text"
+                tools:ignore="TextFields"
+                android:autofillHints="username"
+                android:hint="@string/train_number_label"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    Destination pair   -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/x0003"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/x0002"
+            app:layout_constraintBottom_toTopOf="@id/x0004">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:text="@string/destination"
+                />
+            <TextView
+                android:id="@+id/destination_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:hint="@string/destination"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    Departure time pair   -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/x0004"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/x0003"
+            app:layout_constraintBottom_toTopOf="@id/x0005">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:text="@string/departure_time"
+                />
+            <TextView
+                android:id="@+id/departure_time_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_weight="1"
+                android:inputType="time"
+                android:hint="@string/departure_time"
+                android:importantForAutofill="no" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    Shared seats pair   -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/x0005"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/x0004"
+            app:layout_constraintBottom_toTopOf="@id/x0006">
+            <TextView
+                android:layout_marginStart="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:text="@string/shared_seats"
+                />
+            <TextView
+                android:id="@+id/shared_seats_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="@string/shared_seats"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    compartment seats pair   -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/x0006"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/x0005"
+            app:layout_constraintBottom_toTopOf="@id/x0006">
+            <TextView
+                android:layout_marginStart="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:text="@string/compartment_seats"
+                />
+            <TextView
+                android:id="@+id/compartment_seats_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="@string/compartment_seats"
+                android:importantForAutofill="no" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    reserved seats pair   -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/x0007"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/x0006"
+            app:layout_constraintBottom_toTopOf="@id/x0008">
+            <TextView
+                android:layout_marginStart="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:text="@string/reserved_seats"
+                />
+            <TextView
+                android:id="@+id/reserved_seats_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="@string/reserved_seats"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    luxury seats pair   -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/x0008"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/x0007"
+
+            >
+            <TextView
+                android:layout_marginStart="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:text="@string/luxury_seats"
+                />
+            <TextView
+                android:id="@+id/luxury_seats_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="@string/luxury_seats"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
