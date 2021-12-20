@@ -1,13 +1,18 @@
 package com.example.lab3.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.time.OffsetTime;
 import java.util.ArrayList;
 
+@Entity
 public class Train implements Serializable {
+    @PrimaryKey
     private int id;
+
     private String destination;
     private String trainNumber;
     private OffsetTime departureTime;

@@ -1,5 +1,7 @@
 package com.example.lab3.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
     private MainActivityPresenter presenter;
     private ActivityResultLauncher<String[]> openDocument;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 42);
         RepositoryHolder.setMainRepository(new FileRepository(this));
         presenter = new MainActivityPresenter(RepositoryHolder.getMainRepository());
         openDocument = registerForActivityResult(new ActivityResultContracts.OpenDocument(),

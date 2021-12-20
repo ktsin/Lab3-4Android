@@ -13,13 +13,14 @@ import androidx.viewpager2.adapter.FragmentViewHolder;
 
 import com.example.lab3.fragments.DetailsFragment;
 import com.example.lab3.fragments.MainListFragment;
+import com.example.lab3.fragments.MapsFragment;
 import com.example.lab3.presenter.MainActivityPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivityPageAdapter extends FragmentStateAdapter {
-    private final int PAGES_COUNT = 2;
+    private final int PAGES_COUNT = 3;
     private final MainActivityPresenter presenter;
     private MainListFragment.OnOpenFileClickListener onOpenFileClickListener;
     private RecyclerView.AdapterDataObserver mObserver;
@@ -58,6 +59,9 @@ public class MainActivityPageAdapter extends FragmentStateAdapter {
                         Toast.LENGTH_SHORT).show();
                 if (isElementSelected)
                     return DetailsFragment.newInstance(presenter.getById(selectedId));
+                break;
+            case 2:
+                return new MapsFragment();
         }
         return DetailsFragment.newInstance(null);
     }
