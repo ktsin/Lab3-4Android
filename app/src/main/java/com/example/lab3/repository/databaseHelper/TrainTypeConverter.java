@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.time.OffsetTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TrainTypeConverter {
@@ -27,5 +29,15 @@ public class TrainTypeConverter {
     public static ArrayList<Seat> jsonToSeats(String seats){
         Type collectionType = new TypeToken<ArrayList<Train>>() {}.getType();
         return gson.fromJson(seats, collectionType);
+    }
+
+    @TypeConverter
+    public static String offsetTimeToText(OffsetTime time){
+        return time.format(DateTimeFormatter.ISO_OFFSET_TIME);
+    }
+
+    @TypeConverter
+    public static OffsetTime textToOffsetTime(String time){
+        return OffsetTime.parse(time, DateTimeFormatter.ISO_OFFSET_TIME);
     }
 }

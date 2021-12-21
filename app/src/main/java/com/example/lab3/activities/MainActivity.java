@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +27,6 @@ import com.example.lab3.presenter.MainActivityPresenter;
 import com.example.lab3.repository.FileRepository;
 import com.example.lab3.repository.RepositoryHolder;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 42);
         RepositoryHolder.setMainRepository(new FileRepository(this));
+        RepositoryHolder.setApplicationContext(getApplicationContext());
         presenter = new MainActivityPresenter(RepositoryHolder.getMainRepository());
         openDocument = registerForActivityResult(new ActivityResultContracts.OpenDocument(),
                 result -> {

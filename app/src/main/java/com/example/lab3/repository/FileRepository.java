@@ -40,15 +40,16 @@ public class FileRepository implements IRepository {
     }
 
     @Override
-    public boolean open(Uri uri) {
+    public boolean open(String uri) {
         boolean openResult = false;
         try {
 //            File file = new File(uri);
 //            fileUri = Uri.fromFile(file);
 //            reader = new BufferedReader(new FileReader(file));
-            fileUri = uri;
+//            fileUri = uri;
+            fileUri = Uri.parse(uri);
             Log.d("D001", String.valueOf(uri));
-            InputStream input = context.getContentResolver().openInputStream(uri);
+            InputStream input = context.getContentResolver().openInputStream(fileUri);
             reader = new BufferedReader(new InputStreamReader(input));
             Gson gson = new Gson();
             Type collectionType = new TypeToken<ArrayList<Train>>() {

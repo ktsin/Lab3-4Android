@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save_menu_title">Save</string>
-    <string name="add_new_record">Add new record...</string>
+    <string name="add_new_record">Add new record…</string>
     <string name="save_record_button_label">Save record</string>
     <string name="cancel_button_label">Cancel</string>
     <string name="lorem_ipsum">Lorem ipsum</string>
@@ -20,4 +20,5 @@
     <string name="edit_record">Edit record</string>
     <string name="search_record">Search record</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="open_file">Load data</string>
 </resources>

@@ -78,7 +78,7 @@ public class MainActivityPresenter {
 
     public ArrayList<Train> requestDataFromRepository(){
         if (!repository.isOpened()) {
-            repository.open(connectionUri);
+            repository.open(connectionUri.toString());
         }
         return repository.getAll();
     }

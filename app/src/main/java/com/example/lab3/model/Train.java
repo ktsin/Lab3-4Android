@@ -1,6 +1,7 @@
 package com.example.lab3.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -16,6 +17,7 @@ public class Train implements Serializable {
     private String destination;
     private String trainNumber;
     private OffsetTime departureTime;
+    @ColumnInfo(name = "trainSeats")
     private ArrayList<Seat> seats;
 
     public Train(String destination, String trainNumber, OffsetTime departureTime, ArrayList<Seat> seats) {

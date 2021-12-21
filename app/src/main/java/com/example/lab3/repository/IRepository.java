@@ -8,7 +8,7 @@ import java.time.OffsetTime;
 import java.util.ArrayList;
 
 public interface IRepository {
-    boolean open(Uri uri);
+    boolean open(String uri);
     boolean close();
     boolean save();
     void refresh();
