@@ -18,4 +18,5 @@
     <string name="edit_record">Edit record</string>
     <string name="search_record">Search record</string>
     <string name="open_file">Open file</string>
+    <string name="welcome_animation">welcome animation</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.lab3.activities;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,20 +11,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.lab3.R;
 import com.example.lab3.activities.adapters.MainActivityPageAdapter;
 import com.example.lab3.fragments.SearchDialog;
+import com.example.lab3.fragments.SplashScreen;
 import com.example.lab3.presenter.MainActivityPresenter;
 import com.example.lab3.repository.DatabaseRepository;
-import com.example.lab3.repository.FileRepository;
 import com.example.lab3.repository.RepositoryHolder;
 import com.example.lab3.services.DatabaseService;
 
@@ -49,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainAdapter.setOnOpenFileClickListener(() -> {
             presenter.setConnectionString("mainDb.sqlite3");
+
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Загрузка данных...");
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -72,7 +71,25 @@ public class MainActivity extends AppCompatActivity {
         });
         ViewPager2 vp = ((ViewPager2) findViewById(R.id.mainViewPager));
         vp.setAdapter(mainAdapter);
+        Thread splt = new Thread(() -> {
 
+            try {
+//                TimeUnit.MILLISECONDS.sleep(50);
+                Fragment fragment = new SplashScreen();
+                runOnUiThread(() -> {
+                    findViewById(R.id.splashFrame).setVisibility(View.VISIBLE);
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.splashFrame, fragment, "SPLASH_SCREEN_OWN").commit();
+                });
+                TimeUnit.SECONDS.sleep(3);
+                runOnUiThread(() ->{
+                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                    findViewById(R.id.splashFrame).setVisibility(View.INVISIBLE);
+                });
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e.getCause());
+            }
+        });
+        splt.start();
     }
 
     @Override
@@ -106,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             presenter.onSaveMenuItemClick();
         } else if (itemId == R.id.menu_refresh_action) {
             ((ViewPager2) findViewById(R.id.mainViewPager)).setAdapter(mainAdapter);
-        } else if(itemId == R.id.menu_search_action){
+        } else if (itemId == R.id.menu_search_action) {
 //            AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //            LayoutInflater inflater = this.getLayoutInflater();
 //            builder.setTitle("Search record...").setView(inflater.inflate(R.layout.fragment_search_dialog, null))
