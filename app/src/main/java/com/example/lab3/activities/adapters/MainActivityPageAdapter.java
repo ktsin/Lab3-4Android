@@ -54,9 +54,9 @@ public class MainActivityPageAdapter extends FragmentStateAdapter {
                 presenter.setMainListAdapter(mainListAdapter);
                 return fragment;
             case 1:
-                Toast.makeText(this.context,
-                        String.format("onBindViewHolder %d", 100),
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this.context,
+//                        String.format("onBindViewHolder %d", 100),
+//                        Toast.LENGTH_SHORT).show();
                 if (isElementSelected)
                     return DetailsFragment.newInstance(presenter.getById(selectedId));
                 break;
@@ -74,9 +74,9 @@ public class MainActivityPageAdapter extends FragmentStateAdapter {
     public void onBindViewHolder(@NonNull FragmentViewHolder holder, int position,
                                  @NonNull List<Object> payloads) {
 
-        Toast.makeText(holder.itemView.getContext(),
-                String.format("onBindViewHolder %d", position),
-                Toast.LENGTH_SHORT).show();
+//        Toast.makeText(holder.itemView.getContext(),
+//                String.format("onBindViewHolder %d", position),
+//                Toast.LENGTH_SHORT).show();
 //        bindViewHolder(holder, position);
         super.onBindViewHolder(holder, position, payloads);
     }

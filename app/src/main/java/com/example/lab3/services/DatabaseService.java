@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
+import android.widget.ArrayAdapter;
 
 import androidx.room.Room;
 import androidx.sqlite.db.SimpleSQLiteQuery;
@@ -14,8 +15,10 @@ import com.example.lab3.model.Train;
 import com.example.lab3.repository.RepositoryHolder;
 import com.example.lab3.repository.databaseHelper.TrainDatabase;
 
+import java.time.OffsetTime;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 public class DatabaseService extends Service {
     private final IBinder binder;
@@ -124,6 +127,30 @@ public class DatabaseService extends Service {
             e.printStackTrace();
         }
         return train;
+    }
+
+    public ArrayList<Train> search(String departurePoint) {
+        ArrayList<Train> trains = new ArrayList<>();
+        AsyncTask<String, Void, ArrayList<Train>> task = new AsyncTask<String, Void, ArrayList<Train>>() {
+            @Override
+            protected ArrayList<Train> doInBackground(String... strings) {
+                return new ArrayList<Train>(db.trainsDao().searchByDestination(strings[0]));
+            }
+        };
+        try {
+            trains = task.execute(departurePoint).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return trains;
+    }
+
+    public ArrayList<Train> search(String destinationPoint, OffsetTime departureTime) {
+        ArrayList<Train> trains = search(destinationPoint);
+        return trains
+                .stream()
+                .filter(e -> e.getDepartureTime() != null && e.getDepartureTime().isAfter(departureTime))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
 

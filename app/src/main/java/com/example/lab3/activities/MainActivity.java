@@ -24,52 +24,52 @@ import com.example.lab3.R;
 import com.example.lab3.activities.adapters.MainActivityPageAdapter;
 import com.example.lab3.fragments.SearchDialog;
 import com.example.lab3.presenter.MainActivityPresenter;
+import com.example.lab3.repository.DatabaseRepository;
 import com.example.lab3.repository.FileRepository;
 import com.example.lab3.repository.RepositoryHolder;
+import com.example.lab3.services.DatabaseService;
 
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     private MainActivityPageAdapter mainAdapter;
     private MainActivityPresenter presenter;
-    private ActivityResultLauncher<String[]> openDocument;
 
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 42);
-        RepositoryHolder.setMainRepository(new FileRepository(this));
+        startService(new Intent(getApplicationContext(), DatabaseService.class));
+        RepositoryHolder.setMainRepository(new DatabaseRepository());
         RepositoryHolder.setApplicationContext(getApplicationContext());
         presenter = new MainActivityPresenter(RepositoryHolder.getMainRepository());
-        openDocument = registerForActivityResult(new ActivityResultContracts.OpenDocument(),
-                result -> {
-                    if (result != null)
-                        presenter.setConnectionUri(result, this);
-                    ProgressDialog progressDialog = new ProgressDialog(this);
-                    progressDialog.setMessage("Загрузка данных...");
-                    progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                    progressDialog.setProgress(0);
-                    progressDialog.show();
-                    Thread thread = new Thread(() -> {
-                        try {
-                            for (int i = 1; i < 11; i++) {
-                                TimeUnit.MILLISECONDS.sleep(500);
-                                int finalI = i;
-                                this.runOnUiThread(() -> progressDialog.setProgress(finalI * 10));
-                            }
-                            TimeUnit.MILLISECONDS.sleep(300);
-                            this.runOnUiThread(progressDialog::hide);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    thread.start();
-                });
         mainAdapter = new MainActivityPageAdapter(this, presenter);
         presenter.setPagerAdapter(mainAdapter);
-        mainAdapter.setOnOpenFileClickListener(() -> openDocument.launch(new String[]{"application/*"}));
+
+        mainAdapter.setOnOpenFileClickListener(() -> {
+            presenter.setConnectionString("mainDb.sqlite3");
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Загрузка данных...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setProgress(0);
+            progressDialog.show();
+            Thread thread = new Thread(() -> {
+                try {
+                    for (int i = 1; i < 11; i++) {
+                        TimeUnit.MILLISECONDS.sleep(200);
+                        int finalI = i;
+                        this.runOnUiThread(() -> progressDialog.setProgress(finalI * 10));
+                    }
+                    TimeUnit.MILLISECONDS.sleep(300);
+                    this.runOnUiThread(progressDialog::hide);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            thread.start();
+
+        });
         ViewPager2 vp = ((ViewPager2) findViewById(R.id.mainViewPager));
         vp.setAdapter(mainAdapter);
 

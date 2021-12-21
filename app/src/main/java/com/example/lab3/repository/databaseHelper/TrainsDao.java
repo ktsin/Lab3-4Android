@@ -29,7 +29,7 @@ public interface TrainsDao {
     @Delete
     void remove(Train train);
 
-    @Query("SELECT * FROM Train WHERE Train.destination LIKE :destination")
+    @Query("SELECT * FROM Train WHERE destination LIKE '%' || :destination || '%'")
     List<Train> searchByDestination(String destination);
 
     @Query("SELECT  * FROM Train WHERE Train.id = :id LIMIT 1")

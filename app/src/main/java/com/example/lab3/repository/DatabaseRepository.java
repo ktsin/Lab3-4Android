@@ -28,7 +28,7 @@ public class DatabaseRepository implements IRepository{
         dbName = uri;
         try{
             Intent intent = new Intent(RepositoryHolder.getApplicationContext(), DatabaseService.class);
-            RepositoryHolder.getApplicationContext().startService(intent);
+            //RepositoryHolder.getApplicationContext().startService(intent);
             RepositoryHolder.getApplicationContext().bindService(
                     intent, new DatabaseServiceConnection(), Context.BIND_AUTO_CREATE);
         }
@@ -66,13 +66,19 @@ public class DatabaseRepository implements IRepository{
 
     @Override
     public ArrayList<Train> search(String departurePoint) {
-
-        return null;
+        if(service != null){
+            return service.search(departurePoint);
+        }
+        return new ArrayList<>();
     }
 
     @Override
-    public ArrayList<Train> search(String departurePoint, OffsetTime departureTime) {
-        return null;
+    public ArrayList<Train> search(String destinationPoint, OffsetTime departureTime) {
+        if(service != null){
+            return service.search(destinationPoint, departureTime);
+        }
+
+        return new ArrayList<>();
     }
 
     @Override

@@ -16,6 +16,7 @@ import java.util.Optional;
 public class MainActivityPresenter {
     private final IRepository repository;
     private Uri connectionUri;
+    private String connectionString;
     private OnOpenFileClickListener onOpenFileClickListener;
     private OnSuccessfullyFileOpenedListener onSuccessfullyFileOpenedListener;
     private MainActivityPageAdapter pagerAdapter;
@@ -78,7 +79,7 @@ public class MainActivityPresenter {
 
     public ArrayList<Train> requestDataFromRepository(){
         if (!repository.isOpened()) {
-            repository.open(connectionUri.toString());
+            repository.open(connectionString);
         }
         return repository.getAll();
     }
@@ -99,6 +100,17 @@ public class MainActivityPresenter {
 
     public void setMainListAdapter(MainListAdapter mainListAdapter) {
         this.mainListAdapter = mainListAdapter;
+    }
+
+    public String getConnectionString() {
+        return connectionString;
+    }
+
+    public void setConnectionString(String connectionString) {
+        this.connectionString = connectionString;
+        if(onSuccessfullyFileOpenedListener != null){
+            onSuccessfullyFileOpenedListener.onSuccessfullyFileOpenedListener();
+        }
     }
 
     public interface OnOpenFileClickListener{

@@ -20,24 +20,42 @@ public class TrainTypeConverter {
     }
 
     @TypeConverter
-    public static String seatsToJson(ArrayList<Seat> seats){
-        Type collectionType = new TypeToken<ArrayList<Train>>() {}.getType();
-        return gson.toJson(seats, collectionType);
+    public static String seatsToJson(ArrayList<Seat> seats) {
+        if (seats != null) {
+            Type collectionType = new TypeToken<ArrayList<Seat>>() {
+            }.getType();
+            return gson.toJson(seats, collectionType);
+        }
+        else{
+            return "[]";
+        }
     }
 
     @TypeConverter
-    public static ArrayList<Seat> jsonToSeats(String seats){
-        Type collectionType = new TypeToken<ArrayList<Train>>() {}.getType();
-        return gson.fromJson(seats, collectionType);
+    public static ArrayList<Seat> jsonToSeats(String seats) {
+        if(seats != null){
+            Type collectionType = new TypeToken<ArrayList<Seat>>() {
+            }.getType();
+            return gson.fromJson(seats, collectionType);
+        }
+        else
+            return new ArrayList<Seat>();
+
     }
 
     @TypeConverter
-    public static String offsetTimeToText(OffsetTime time){
-        return time.format(DateTimeFormatter.ISO_OFFSET_TIME);
+    public static String offsetTimeToText(OffsetTime time) {
+        if (time != null)
+            return time.format(DateTimeFormatter.ISO_OFFSET_TIME);
+        else
+            return OffsetTime.MIN.format(DateTimeFormatter.ISO_OFFSET_TIME);
     }
 
     @TypeConverter
-    public static OffsetTime textToOffsetTime(String time){
-        return OffsetTime.parse(time, DateTimeFormatter.ISO_OFFSET_TIME);
+    public static OffsetTime textToOffsetTime(String time) {
+        if (time != null)
+            return OffsetTime.parse(time, DateTimeFormatter.ISO_OFFSET_TIME);
+        else
+            return OffsetTime.MIN;
     }
 }

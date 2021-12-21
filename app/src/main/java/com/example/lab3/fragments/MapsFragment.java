@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -31,6 +32,8 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Objects;
 
 public class MapsFragment extends Fragment {
     private LocationManager locationManager;
@@ -56,6 +59,7 @@ public class MapsFragment extends Fragment {
     };
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
+        @SuppressLint("NewApi")
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LatLng sydney = new LatLng(52.4313, 30.9934);
@@ -65,7 +69,9 @@ public class MapsFragment extends Fragment {
             locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
             if (ActivityCompat.checkSelfPermission(getContext(), ACCESS_FINE_LOCATION) != PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(getContext(), ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED) {
-
+                requireActivity().requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION},
+                        42);
                 return;
             }
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 200, locationListener);
